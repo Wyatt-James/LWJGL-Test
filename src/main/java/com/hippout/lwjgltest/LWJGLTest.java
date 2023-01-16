@@ -1,5 +1,10 @@
 package com.hippout.lwjgltest;
 
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+
 import java.nio.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -99,10 +104,21 @@ public class LWJGLTest {
 
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        float red, green, blue;
+
+        long startTime = System.nanoTime();
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
+
+            double fTimeElapsed = (System.nanoTime() - startTime) / 1000000000.0;
+            red = (float) Math.sin(fTimeElapsed);
+            green = (float) Math.cos(fTimeElapsed - 0.3);
+            blue = (float) Math.sin(fTimeElapsed - 1.2);
+
+            glClearColor(red, green, blue, 1f);
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
             glfwSwapBuffers(window); // swap the color buffers
@@ -112,5 +128,4 @@ public class LWJGLTest {
             glfwPollEvents();
         }
     }
-
 }
