@@ -9,24 +9,27 @@ import java.nio.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class LWJGLTest {
+public class Framework {
 
     // The window handle
     private long window;
 
+    private GLTest test;
+
     public static void main(String[] args)
     {
-        new LWJGLTest().run();
+        new Framework().run();
     }
 
     public void run()
     {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
+        test = new WorkingCode();
         init();
         loop();
 
@@ -89,6 +92,8 @@ public class LWJGLTest {
         // Enable v-sync
         glfwSwapInterval(1);
 
+        test.init(window);
+
         // Make the window visible
         glfwShowWindow(window);
     }
@@ -104,24 +109,11 @@ public class LWJGLTest {
 
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-        float red, green, blue;
-
-        long startTime = System.nanoTime();
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
-
-            double fTimeElapsed = (System.nanoTime() - startTime) / 1000000000.0;
-            red = (float) Math.sin(fTimeElapsed);
-            green = (float) Math.cos(fTimeElapsed - 0.3);
-            blue = (float) Math.sin(fTimeElapsed - 1.2);
-
-            glClearColor(red, green, blue, 1f);
-
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
-            glfwSwapBuffers(window); // swap the color buffers
+            test.display();
 
             // Poll for window events. The key callback above will only be
             // invoked during this call.
