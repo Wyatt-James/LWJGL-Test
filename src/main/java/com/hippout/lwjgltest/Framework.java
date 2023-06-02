@@ -2,7 +2,7 @@ package com.hippout.lwjgltest;
 
 import com.hippout.lwjgltest.exceptions.*;
 import com.hippout.lwjgltest.io.*;
-import com.hippout.lwjgltest.tutorials.tut03.*;
+import com.hippout.lwjgltest.tutorials.tut04.*;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -161,7 +161,8 @@ public class Framework {
 
     private void loop()
     {
-        final GLTest test = new FragChangeColor();
+        final GLTest test = new AspectRatio();
+        glfwSetWindowSizeCallback(window, test);
 
         test.init(window);
 

@@ -63,8 +63,6 @@ public class VertPositionOffset extends GLTest {
         program = initializeProgram();
         positionBufferObject = initializeVertexBuffer();
 
-        glfwSetWindowSizeCallback(window, new WindowSizeCallback());
-
         int vao = glGenVertexArrays();
         glBindVertexArray(vao);
     }
@@ -104,5 +102,11 @@ public class VertPositionOffset extends GLTest {
         glUseProgram(0);
 
         glfwSwapBuffers(window);
+    }
+
+    @Override
+    protected void onWindowSizeChange(long window, int width, int height)
+    {
+        glViewport(0, 0, width, height);
     }
 }

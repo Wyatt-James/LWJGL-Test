@@ -59,8 +59,6 @@ public class FragPosition extends GLTest {
         program = initializeProgram();
         vertexBufferObject = initializeVertexBuffer();
 
-        glfwSetWindowSizeCallback(window, new WindowSizeCallback());
-
         int vao = glGenVertexArrays();
         glBindVertexArray(vao);
     }
@@ -82,5 +80,11 @@ public class FragPosition extends GLTest {
         glUseProgram(0);
 
         glfwSwapBuffers(window);
+    }
+
+    @Override
+    protected void onWindowSizeChange(long window, int width, int height)
+    {
+        glViewport(0, 0, width, height);
     }
 }
