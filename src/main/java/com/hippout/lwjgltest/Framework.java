@@ -144,7 +144,7 @@ public class Framework {
                     (vidmode.width() - pWidth.get(0)) / 2,
                     (vidmode.height() - pHeight.get(0)) / 2
             );
-        } // the stack frame is popped automaticallyLocalJarResourceLoader
+        } // the stack frame is popped automatically
 
         // Make the OpenGL context current
         glfwMakeContextCurrent(window);
