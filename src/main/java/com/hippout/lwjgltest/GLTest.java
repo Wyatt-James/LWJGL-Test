@@ -28,4 +28,6 @@ public abstract class GLTest extends GLFWWindowSizeCallback {
     }
 
     protected abstract void onWindowSizeChange(long window, int width, int height);
+
+    protected abstract void onKeyboard(long window, int key);
 }

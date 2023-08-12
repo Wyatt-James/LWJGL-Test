@@ -2,7 +2,7 @@ package com.hippout.lwjgltest;
 
 import com.hippout.lwjgltest.exceptions.*;
 import com.hippout.lwjgltest.io.*;
-import com.hippout.lwjgltest.tutorials.tut04.*;
+import com.hippout.lwjgltest.tutorials.tut05.*;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -24,27 +24,14 @@ public class Framework {
 
     public static ResourceLoader jarResourceLoader;
 
+    public final GLTest test;
+
     // The window handle
     private long window;
 
-    public static void main(String[] args)
+    public Framework()
     {
-        // Wait if we have received an arg
-        if (args.length >= 1) {
-            final String waitTimeStr = args[0];
-            try {
-                final double waitTime = Double.parseDouble(waitTimeStr);
-
-                System.out.printf("Waiting for %f seconds.\n", waitTime);
-                Thread.sleep((long) (waitTime * 1000));
-            } catch (NumberFormatException e) {
-                System.out.printf("Arg error: %s is not a valid double. Will not wait.\n", waitTimeStr);
-            } catch (InterruptedException e) {
-                System.out.println("Finished waiting.");
-            }
-        }
-
-        new Framework().run();
+        test = new DepthClamping();
     }
 
     public void run()
@@ -101,6 +88,27 @@ public class Framework {
         return shader;
     }
 
+    public static void main(String[] args)
+    {
+
+        // Wait if we have received an arg
+        if (args.length >= 1) {
+            final String waitTimeStr = args[0];
+            try {
+                final double waitTime = Double.parseDouble(waitTimeStr);
+
+                System.out.printf("Waiting for %f seconds.\n", waitTime);
+                Thread.sleep((long) (waitTime * 1000));
+            } catch (NumberFormatException e) {
+                System.out.printf("Arg error: %s is not a valid double. Will not wait.\n", waitTimeStr);
+            } catch (InterruptedException e) {
+                System.out.println("Finished waiting.");
+            }
+        }
+
+        new Framework().run();
+    }
+
     private void init()
     {
         // Setup an error callback. The default implementation
@@ -123,8 +131,8 @@ public class Framework {
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+            if (action == GLFW_PRESS)
+                test.onKeyboard(window, key);
         });
 
         // Get the thread stack and push a new frame
@@ -161,7 +169,7 @@ public class Framework {
 
     private void loop()
     {
-        final GLTest test = new AspectRatio();
+        final GLTest test = new VertexClipping();
         glfwSetWindowSizeCallback(window, test);
 
         test.init(window);

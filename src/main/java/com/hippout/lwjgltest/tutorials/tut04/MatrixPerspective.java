@@ -216,4 +216,12 @@ public class MatrixPerspective extends GLTest {
     {
         glViewport(0, 0, width, height);
     }
+
+    @Override
+    protected final void onKeyboard(long window, int key)
+    {
+        if (key == GLFW_KEY_ESCAPE) {
+            glfwSetWindowShouldClose(window, true);
+        }
+    }
 }
