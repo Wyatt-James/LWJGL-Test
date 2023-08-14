@@ -2,7 +2,7 @@ package com.hippout.lwjgltest.tutorials.tut05;
 
 import java.util.*;
 
-public class MeshData {
+public class Tut05MeshData {
 
     public static final int numberOfVertices = 36;
 

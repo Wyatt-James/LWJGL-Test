@@ -37,9 +37,9 @@ public class VertexClipping extends GLTest {
         perspectiveMatrix[14] = (2 * zFar * zNear) / (zNear - zFar);
         perspectiveMatrix[11] = -1.0f;
 
-        numberOfVertices = MeshData.numberOfVertices;
-        vertexData = MeshData.getVertexData();
-        indexData = MeshData.getIndexData();
+        numberOfVertices = Tut05MeshData.numberOfVertices;
+        vertexData = Tut05MeshData.getVertexData();
+        indexData = Tut05MeshData.getIndexData();
     }
 
     private int initializeProgram()

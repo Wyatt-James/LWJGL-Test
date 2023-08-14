@@ -2,7 +2,7 @@ package com.hippout.lwjgltest;
 
 import com.hippout.lwjgltest.exceptions.*;
 import com.hippout.lwjgltest.io.*;
-import com.hippout.lwjgltest.tutorials.tut05.*;
+import com.hippout.lwjgltest.tutorials.tut06.*;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -31,7 +31,7 @@ public class Framework {
 
     public Framework()
     {
-        test = new DepthClamping();
+        test = new Rotation();
     }
 
     public void run()
@@ -169,7 +169,6 @@ public class Framework {
 
     private void loop()
     {
-        final GLTest test = new VertexClipping();
         glfwSetWindowSizeCallback(window, test);
 
         test.init(window);
